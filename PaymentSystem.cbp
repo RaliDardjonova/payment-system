@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="PaymentSystem" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/PaymentSystem" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/PaymentSystem" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="Date.cpp" />
+		<Unit filename="Date.h" />
+		<Unit filename="FromToBudgetOrder.cpp" />
+		<Unit filename="FromToBudgetOrder.h" />
+		<Unit filename="IBAN.cpp" />
+		<Unit filename="IBAN.h" />
+		<Unit filename="InternationalBank.cpp" />
+		<Unit filename="InternationalBank.h" />
+		<Unit filename="InternationalPaymentOrder.cpp" />
+		<Unit filename="InternationalPaymentOrder.h" />
+		<Unit filename="MoneyOriginDeclaration.cpp" />
+		<Unit filename="MoneyOriginDeclaration.h" />
+		<Unit filename="OrdinaryOrder.cpp" />
+		<Unit filename="OrdinaryOrder.h" />
+		<Unit filename="PaymentOrder.cpp" />
+		<Unit filename="PaymentOrder.h" />
+		<Unit filename="ValueDate.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="transactionStatus.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
