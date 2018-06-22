@@ -6,18 +6,19 @@
 class Date{
 public:
     Date();
-    std::string getDate();
-    time_t getTime();
-    int getDay();
-    int getMonth();
-    int getYear();
+    Date(const Date&);
+    Date(std::string);
+    ~Date();
+    std::string toString();
+    int getDay() const;
+    int getMonth() const;
+    int getYear() const;
     void setDay(unsigned int newDay);
     void setMonth(unsigned int newMonth);
     void setYear(unsigned int newDay);
 private:
-    tm *dateTime;
+    tm dateTime;
 };
-
 
 #endif
 
