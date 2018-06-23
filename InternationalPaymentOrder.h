@@ -1,28 +1,54 @@
 #ifndef _INTERNATIONALPAYMENTORDER_H
 #define _INTERNATIONALPAYMENTORDER_H
 
+#include <algorithm>
 #include "PaymentOrder.h"
 #include "InternationalBank.h"
 #include "ValueDate.h"
 #include "ChargesDetails.h"
+#define MIN_SEND_CHARGE 15.0
+#define MAX_SEND_CHARGE 200.0
+#define MAX_RECEIVE_CHARGE 90.0
 
-class InternationalPaymentOrder: public PaymentOrder {
+class InternationalOrder: public PaymentOrder {
 public:
+    InternationalOrder();
+    InternationalOrder(const InternationalOrder&);
+    ~InternationalOrder();
 
-std::string getOperationName();
-double computeSenderCharges();
-double computerReceiverCharges();
+    void setCurrency(std::string);
+    void setReceiverAddress(std::string);
+    void setReceiverCountry(std::string);
+    void setReceiverBank(InternationalBank);
+    void setIntermediaryBank(InternationalBank);
+    void setExecutionPeriod(ValueDate);
+    void setSenderCharges(ChargesDetails);
+    void setReceiverCharges(ChargesDetails);
 
+    std::string getCurrency() const;
+    std::string getReceiverAddress() const;
+    std::string getReceiverCountry() const;
+    InternationalBank getReceiverBank() const;
+    InternationalBank getIntermediaryBank() const;
+    ValueDate getExecutionPeriod() const;
+    ChargesDetails getSenderCharges() const;
+    ChargesDetails getReceiverCharges() const;
+
+    void save(bool);
+
+    double computeOURCharges();
 private:
     std::string currency;
     std::string receiverAddress;
-    std::string receiverCountrey;
+    std::string receiverCountry;
     InternationalBank receiverBank;
-    InternationalBank otherBank;
-    std::string operationCode;
+    InternationalBank intermediaryBank;
     ValueDate executionPeriod;
     ChargesDetails senderCharges;
     ChargesDetails receiverCharges;
+    double computeSenderCharges();
+    double computeReceiverCharges();
+    double persentageCharges();
 };
 
 #endif //_INTERNATIONALPAYMENTORDER_H

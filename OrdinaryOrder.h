@@ -4,6 +4,13 @@
 #include "PaymentOrder.h"
 
 class OrdinaryOrder: public PaymentOrder {
+public:
+    OrdinaryOrder();
+    OrdinaryOrder(const OrdinaryOrder&);
+    ~OrdinaryOrder();
+
+    void save(bool);
+    std::string getCurrency() const;
 private:
     static std::string currency;
 };
