@@ -72,3 +72,5 @@ TEST_CASE("Save transaction", "[save transaction]"){
         Transaction::deleteFromDB(transactionLastID);
     }
 }
+
+
