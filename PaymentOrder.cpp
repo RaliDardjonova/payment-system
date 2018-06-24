@@ -22,7 +22,6 @@ PaymentOrder::PaymentOrder(const PaymentOrder& other){
 
 PaymentOrder::~PaymentOrder(){}
 
-
 void PaymentOrder::setReceiverIBAN(IBAN newIBAN){
     receiverIBAN = IBAN(newIBAN);
 }
@@ -79,4 +78,9 @@ SettlementSystem PaymentOrder::getSettllementSystem() const {
 
 double PaymentOrder::getAmount() const {
     return amount;
+}
+
+void PaymentOrder::deleteFromDB(std::string orderID){
+    std::string condition = "order_id = '" + orderID + "'";
+    deleteFromTable(condition, "PaymentOrder");
 }

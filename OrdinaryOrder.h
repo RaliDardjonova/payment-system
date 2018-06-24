@@ -8,9 +8,12 @@ public:
     OrdinaryOrder();
     OrdinaryOrder(const OrdinaryOrder&);
     ~OrdinaryOrder();
+    OrderPointer create() const;
+    OrderPointer clone() const;
 
     void save(bool);
     std::string getCurrency() const;
+    static void deleteFromDB(std::string);
 private:
     static std::string currency;
 };

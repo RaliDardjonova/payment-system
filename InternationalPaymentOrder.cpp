@@ -12,11 +12,25 @@ InternationalOrder::InternationalOrder(){
 }
 
 InternationalOrder::InternationalOrder(const InternationalOrder& other){
-
-
+    setCurrency(other.getCurrency());
+    setReceiverAddress(other.getReceiverAddress());
+    setReceiverCountry(other.getReceiverCountry());
+    setReceiverBank(other.getReceiverBank());
+    setIntermediaryBank(other.getIntermediaryBank());
+    setExecutionPeriod(other.getExecutionPeriod());
+    setSenderCharges(other.getSenderCharges());
+    setReceiverCharges(other.getReceiverCharges());
 }
 
 InternationalOrder::~InternationalOrder(){}
+
+PaymentOrder::OrderPointer InternationalOrder::create () const {
+    return OrderPointer(new InternationalOrder());
+}
+
+PaymentOrder::OrderPointer InternationalOrder::clone () const {
+    return OrderPointer(new InternationalOrder(*this));
+}
 
 void InternationalOrder::setCurrency(std::string newCurrency){
     if(newCurrency.size() == CURRENCY_LENGTH){
@@ -87,10 +101,12 @@ ChargesDetails InternationalOrder::getReceiverCharges() const{
 
 
 void InternationalOrder::save(bool isTemplate){
-    std::string paymentOrderValues = "NULL, 'I', '" + std::to_string(isTemplate) + "'";
+    std::string paymentOrderValues = "NULL, 'I', '" + std::to_string(isTemplate) +
+                                    "', '" + getSenderIBAN().getIBAN() +
+                                    "', '" + getSenderName() + "'";
     saveToTable(paymentOrderValues, "PaymentOrder");
 
-    std::string ordinaryOrderValues = "'" + std::to_string(getLastInsertedID()) +
+    std::string ordinaryOrderValues = "'" + getLastInsertedID() +
                                     "', '" + getReceiverIBAN().getIBAN() +
                                     "', '" + getReceiverName() +
                                     "', '" + getCurrency() +
@@ -98,11 +114,12 @@ void InternationalOrder::save(bool isTemplate){
                                     "', '" + getDescription() +
                                     "', '" + getReceiverAddress() +
                                     "', '" + getReceiverCountry() +
+                                    "', '" + std::to_string(getExecutionPeriod()) +
                                     "', '" + std::to_string(getSenderCharges()) +
                                     "', '" + std::to_string(getReceiverCharges()) +
                                     "', '" + getReceiverBank().getBankSWIFT() +
                                     "', '" + getIntermediaryBank().getBankSWIFT() + "'";
-    saveToTable(ordinaryOrderValues, "OrdinaryOrder");
+    saveToTable(ordinaryOrderValues, "InternationalOrder");
 }
 
 double InternationalOrder::computeSenderCharges() {
@@ -130,4 +147,8 @@ double InternationalOrder::persentageCharges(){
         case NORMAL: return 0.2;
     }
     return 0;
+}
+
+void InternationalOrder::deleteFromDB(std::string orderID){
+    PaymentOrder::deleteFromDB(orderID);
 }

@@ -16,6 +16,7 @@ public:
     void setDay(unsigned int newDay);
     void setMonth(unsigned int newMonth);
     void setYear(unsigned int newDay);
+    static Date getCurrentDate();
 private:
     tm dateTime;
 };

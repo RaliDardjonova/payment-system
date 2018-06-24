@@ -15,6 +15,8 @@ public:
     InternationalOrder();
     InternationalOrder(const InternationalOrder&);
     ~InternationalOrder();
+    OrderPointer create() const;
+    OrderPointer clone() const;
 
     void setCurrency(std::string);
     void setReceiverAddress(std::string);
@@ -35,7 +37,7 @@ public:
     ChargesDetails getReceiverCharges() const;
 
     void save(bool);
-
+    static void deleteFromDB(std::string);
     double computeOURCharges();
 private:
     std::string currency;

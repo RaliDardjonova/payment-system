@@ -9,12 +9,13 @@
 #include <cppconn/statement.h>
 
 extern sql::Driver *driver;
-extern sql::Connection *con;
-extern sql::Statement *stmt;
-extern sql::ResultSet *res;
+extern sql::Connection *connection;
+
 
 void createConnection();
-
-
+void printSQLError(sql::SQLException &e);
+void saveToTable(std::string, std::string);
+std::string getLastInsertedID();
+void deleteFromTable(std::string, std::string);
 
 #endif // _SQL_CONTROLLERS_H

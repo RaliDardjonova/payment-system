@@ -3,21 +3,24 @@ USE PaymentSystem;
 
 CREATE TABLE PaymentOrder
 (
-  order_id VARCHAR(50) NOT NULL,
+  order_id INT NOT NULL AUTO_INCREMENT,
   type CHAR(1) NOT NULL,
+  isTemplate CHAR(1) NOT NULL,
+  senderIBAN CHAR(22) NOT NULL,
+  senderName VARCHAR(200) NOT NULL,
   PRIMARY KEY (order_id)
 );
 
 CREATE TABLE OrdinaryOrder
 (
-  order_id VARCHAR(50) NOT NULL,
+  order_id INT NOT NULL,
   receiverIBAN CHAR(22) NOT NULL,
   receiverName VARCHAR(200) NOT NULL,
   amount FLOAT NOT NULL,
   description VARCHAR(200) NOT NULL,
-  paymentSystem CHAR(1) NOT NULL,
+  settlementSystem CHAR(1) NOT NULL,
   PRIMARY KEY (order_id),
-  FOREIGN KEY (order_id) REFERENCES PaymentOrder(order_id)
+  FOREIGN KEY (order_id) REFERENCES PaymentOrder(order_id) ON DELETE CASCADE
 );
 
 CREATE TABLE InternationalBank
@@ -37,9 +40,19 @@ CREATE TABLE Document
   PRIMARY KEY (documentNumber)
 );
 
+CREATE TABLE Transaction
+(
+  trans_id INT NOT NULL AUTO_INCREMENT,
+  order_id INT NOT NULL,
+  signDate DATE NOT NULL,
+  status CHAR(1) NOT NULL,
+  PRIMARY KEY (trans_id),
+  FOREIGN KEY (order_id) REFERENCES PaymentOrder(order_id) ON DELETE CASCADE
+);
+
 CREATE TABLE InternationalOrder
 (
-  order_id VARCHAR(50) NOT NULL,
+  order_id INT NOT NULL,
   receiverIBAN CHAR(22) NOT NULL,
   receiverName VARCHAR(200) NOT NULL,
   currency CHAR(3) NOT NULL,
@@ -47,21 +60,20 @@ CREATE TABLE InternationalOrder
   description VARCHAR(200) NOT NULL,
   receiverAddress VARCHAR(200) NOT NULL,
   receiverCountry VARCHAR(50) NOT NULL,
-  operationCode CHAR(3) NOT NULL,
   executionPeriod CHAR(1) NOT NULL,
   senderCharges CHAR(1) NOT NULL,
   receiverCharges CHAR(1) NOT NULL,
   receiverBankSWIFT CHAR(8) NOT NULL,
-  otherBankSWIFT CHAR(8) ,
+  intermediaryBankSWIFT CHAR(8),
   PRIMARY KEY (order_id),
-  FOREIGN KEY (order_id) REFERENCES PaymentOrder(order_id),
+  FOREIGN KEY (order_id) REFERENCES PaymentOrder(order_id) ON DELETE CASCADE,
   FOREIGN KEY (receiverBankSWIFT) REFERENCES InternationalBank(bankSWIFT),
-  FOREIGN KEY (otherBankSWIFT) REFERENCES InternationalBank(bankSWIFT)
+  FOREIGN KEY (intermediaryBankSWIFT) REFERENCES InternationalBank(bankSWIFT)
 );
 
-CREATE TABLE ToBudgetOrder
+CREATE TABLE FromToBudgetOrder
 (
-  order_id VARCHAR(50) NOT NULL,
+  order_id INT NOT NULL,
   receiverIBAN CHAR(22) NOT NULL,
   receiverName VARCHAR(200) NOT NULL,
   amount FLOAT NOT NULL,
@@ -69,10 +81,10 @@ CREATE TABLE ToBudgetOrder
   relevantPaymentStartDate DATE NOT NULL,
   relevantPaymentEndDate DATE NOT NULL,
   paymentType CHAR(6) NOT NULL,
-  paymentSystem CHAR(1) NOT NULL,
+  settlementSystem CHAR(1) NOT NULL,
   documentNumber VARCHAR(50) NOT NULL,
   PRIMARY KEY (order_id),
-  FOREIGN KEY (order_id) REFERENCES PaymentOrder(order_id),
+  FOREIGN KEY (order_id) REFERENCES PaymentOrder(order_id) ON DELETE CASCADE,
   FOREIGN KEY (documentNumber) REFERENCES Document(documentNumber)
 );
 
@@ -83,3 +95,9 @@ CREATE TABLE Bank
   shortName CHAR(4) NOT NULL,
   PRIMARY KEY (BIC)
 );
+
+insert into Bank values ('RZBBBGSF', 'raifai', 'RZBB');
+insert into InternationalBank values ( '12345678', 'nqkwa banka1', 'sofiq, adresa na nqkwata banka');
+insert into InternationalBank values ('', '', '');
+insert into Document values ('123456', '9', '2012-12-23', 'Ivan Ivanov');
+insert into Document values ('asd123', '1', '2018-12-31', 'Pesho Peshov');

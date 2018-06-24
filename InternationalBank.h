@@ -2,6 +2,7 @@
 #define _INTERNATIONALBANK_H
 #include<string>
 #include "sql-controllers.h"
+#define SWIFT_LENGTH 8
 
 class InternationalBank {
 public:
@@ -11,6 +12,7 @@ public:
     std::string getBankAddress();
     std::string getBankSWIFT();
     void setBankSWIFT(std::string bankSWIFT);
+    void save();
 private:
     std::string bankSWIFT;
 };

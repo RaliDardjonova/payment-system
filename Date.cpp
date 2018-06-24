@@ -86,3 +86,14 @@ void Date::setDay(unsigned int newDay)
         dateTime.tm_mday = newDay;
     }
 }
+
+Date Date::getCurrentDate(){
+    Date currentDate = Date();
+    time_t currentTime = time(0);
+    tm now = *(localtime(&currentTime));
+    currentDate.setDay(now.tm_mday);
+    currentDate.setMonth(now.tm_mon + 1);
+    currentDate.setYear(now.tm_year + 1900);
+
+    return currentDate;
+}

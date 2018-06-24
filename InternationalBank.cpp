@@ -1,5 +1,5 @@
 #include "InternationalBank.h"
-#define SWIFT_LENGTH 8
+
 
 InternationalBank::InternationalBank()
 {
@@ -16,10 +16,11 @@ std::string InternationalBank::getBankName() {
     sql::Statement *statement;
     sql::ResultSet *result;
     std::string bankName = "";
+    std::string query = "select BankName from InternationalBank where bankSWIFT = '" + this->getBankSWIFT() + "';";
 
     try {
         statement = connection->createStatement();
-        result = statement->executeQuery("select BankName from InternationalBank where bankSWIFT = '" + this->getBankSWIFT() + "';");
+        result = statement->executeQuery(query);
 
         if(result->next()){
             bankName = result->getString("bankName");
@@ -58,4 +59,11 @@ void InternationalBank::setBankSWIFT(std::string newBankSWIFT){
     if(newBankSWIFT.size() == SWIFT_LENGTH){
         bankSWIFT = newBankSWIFT;
     }
+}
+
+void InternationalBank::save(){
+    std::string values = "'" + getBankSWIFT() +
+                        "', '" + getBankName() +
+                        "', '" + getBankAddress() + "'";
+    saveToTable(values, "InternationalBank");
 }

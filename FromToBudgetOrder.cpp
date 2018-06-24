@@ -16,6 +16,14 @@ FromToBudgetOrder::FromToBudgetOrder(const FromToBudgetOrder& other){
 
 FromToBudgetOrder::~FromToBudgetOrder(){}
 
+PaymentOrder::OrderPointer FromToBudgetOrder::create () const {
+    return OrderPointer(new FromToBudgetOrder());
+}
+
+PaymentOrder::OrderPointer FromToBudgetOrder::clone () const {
+    return OrderPointer(new FromToBudgetOrder(*this));
+}
+
 std::string FromToBudgetOrder::currency = "BGN";
 
 std::string FromToBudgetOrder::getCurrency() const {
@@ -87,11 +95,12 @@ bool FromToBudgetOrder::isReceiverIBANCorrect(std::string receiverIBANToCheck){
 }
 
 void FromToBudgetOrder::save(bool isTemplate){
-    std::string paymentOrderValues = "NULL, 'B', '" + std::to_string(isTemplate) + "'";
+    std::string paymentOrderValues = "NULL, 'B', '" + std::to_string(isTemplate) +
+                                    "', '" + getSenderIBAN().getIBAN() +
+                                    "', '" + getSenderName() + "'";
     saveToTable(paymentOrderValues, "PaymentOrder");
 
-
-    std::string fromToBudgetOrderValues = "'" + std::to_string(getLastInsertedID()) +
+    std::string fromToBudgetOrderValues = "'" + getLastInsertedID() +
                                     "', '" + getReceiverIBAN().getIBAN() +
                                     "', '" + getReceiverName() +
                                     "', '" + std::to_string(getAmount()) +
@@ -102,6 +111,10 @@ void FromToBudgetOrder::save(bool isTemplate){
                                     "', '" + std::to_string(getSettllementSystem()) +
                                     "', '" + getDocument().getNumber() + "'";
     saveToTable(fromToBudgetOrderValues, "FromToBudgetOrder");
+}
+
+void FromToBudgetOrder::deleteFromDB(std::string orderID){
+    PaymentOrder::deleteFromDB(orderID);
 }
 
 

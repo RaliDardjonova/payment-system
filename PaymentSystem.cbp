@@ -32,8 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="ChargesDetails.h" />
 		<Unit filename="Date.cpp" />
 		<Unit filename="Date.h" />
+		<Unit filename="Document.cpp" />
+		<Unit filename="Document.h" />
 		<Unit filename="FromToBudgetOrder.cpp" />
 		<Unit filename="FromToBudgetOrder.h" />
 		<Unit filename="IBAN.cpp" />
@@ -42,14 +45,26 @@
 		<Unit filename="InternationalBank.h" />
 		<Unit filename="InternationalPaymentOrder.cpp" />
 		<Unit filename="InternationalPaymentOrder.h" />
-		<Unit filename="MoneyOriginDeclaration.cpp" />
-		<Unit filename="MoneyOriginDeclaration.h" />
+		<Unit filename="NumberInWords.cpp" />
+		<Unit filename="NumberInWords.h" />
 		<Unit filename="OrdinaryOrder.cpp" />
 		<Unit filename="OrdinaryOrder.h" />
 		<Unit filename="PaymentOrder.cpp" />
 		<Unit filename="PaymentOrder.h" />
+		<Unit filename="SettlementSystem.h" />
+		<Unit filename="Transaction.cpp" />
+		<Unit filename="Transaction.h" />
+		<Unit filename="UnitTests/DocumentTest.cpp" />
+		<Unit filename="UnitTests/FromToBudgetOrderTest.cpp" />
+		<Unit filename="UnitTests/IBANTest.cpp" />
+		<Unit filename="UnitTests/InternationalBankTest.cpp" />
+		<Unit filename="UnitTests/OrdinaryOrderTest.cpp" />
+		<Unit filename="UnitTests/catch.hpp" />
+		<Unit filename="UnitTests/maintest.cpp" />
 		<Unit filename="ValueDate.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="sql-controllers.cpp" />
+		<Unit filename="sql-controllers.h" />
 		<Unit filename="transactionStatus.h" />
 		<Extensions>
 			<code_completion />

@@ -14,6 +14,8 @@ public:
     FromToBudgetOrder();
     FromToBudgetOrder(const FromToBudgetOrder &other);
     ~FromToBudgetOrder();
+    OrderPointer create() const;
+    OrderPointer clone() const;
 
     void setRelevantPaymentPeriodStart(Date);
     void setRelevantPaymentPeriodEnd(Date);
@@ -28,6 +30,7 @@ public:
     Document getDocument() const;
     std::string getCurrency() const;
     void save(bool);
+    static void deleteFromDB(std::string);
 private:
     static std::string currency;
     Date relevantPaymentPeriodStart;

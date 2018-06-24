@@ -1,16 +1,21 @@
 #ifndef _PAYMENTORDER_H
 #define _PAYMENTORDER_H
 #include<string>
+#include<memory>
 #include "IBAN.h"
-#include "MoneyOriginDeclaration.h"
 #include "SettlementSystem.h"
 #define CURRENCY_LENGTH 3
 
+
 class PaymentOrder {
 public:
+    typedef std::shared_ptr<PaymentOrder> OrderPointer;
     PaymentOrder();
     PaymentOrder(const PaymentOrder&);
-    ~PaymentOrder();
+    virtual ~PaymentOrder();
+    virtual OrderPointer create () const = 0;
+    virtual OrderPointer clone () const = 0;
+
     virtual void setReceiverIBAN(IBAN);
     void setReceiverName(std::string);
     void setDescription(std::string);
@@ -29,6 +34,7 @@ public:
 
     virtual void save(bool) = 0;
     virtual std::string getCurrency() const = 0;
+    static void deleteFromDB(std::string);
 protected:
     IBAN receiverIBAN;
     std::string receiverName;
@@ -37,7 +43,6 @@ protected:
     std::string senderName;
     SettlementSystem settlementSystem;
     double amount;
-    MoneyOriginDeclaration declaration;
 };
 
 #endif //_PAYMENTORDER_H
