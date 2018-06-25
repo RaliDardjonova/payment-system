@@ -93,6 +93,8 @@ bool FromToBudgetOrder::isReceiverIBANCorrect(std::string receiverIBANToCheck){
     return FromToBudgetOrder::paymentTypes.find(IBANTypeIdentifier) != paymentTypes.end();
 }
 
+/* save a from/to budget order into DB
+with possibility of being template */
 void FromToBudgetOrder::save(bool isTemplate){
     std::string paymentOrderValues = "NULL, 'B', '" + std::to_string(isTemplate) +
                                     "', '" + getSenderIBAN().getIBAN() +
@@ -116,6 +118,8 @@ void FromToBudgetOrder::deleteFromDB(std::string orderID){
     PaymentOrder::deleteFromDB(orderID);
 }
 
+/* set of corresponding IBAN 13 and 14 symbol
+to the two first symbols of payment type */
 std::unordered_map<std::string, std::string> FromToBudgetOrder::paymentTypes = {
         {"81","11"},
         {"82","22"},

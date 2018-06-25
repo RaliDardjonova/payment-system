@@ -99,7 +99,8 @@ ChargesDetails InternationalOrder::getReceiverCharges() const{
     return receiverCharges;
 }
 
-
+/* save international order in the DB with
+the possibility of being template */
 void InternationalOrder::save(bool isTemplate){
     std::string paymentOrderValues = "NULL, 'I', '" + std::to_string(isTemplate) +
                                     "', '" + getSenderIBAN().getIBAN() +

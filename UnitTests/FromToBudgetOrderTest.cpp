@@ -39,8 +39,8 @@ TEST_CASE ("Get ammount in words", "[ammount in words]"){
     REQUIRE(result->getString("receiverName") == "");
     REQUIRE(result->getString("amount") == "12");
     REQUIRE(result->getString("description") == "");
-    REQUIRE(result->getString("relevantPaymentStartDate") == "1900-01-00");
-    REQUIRE(result->getString("relevantPaymentEndDate") == "1900-01-00");
+    REQUIRE(result->getString("relevantPaymentStartDate") == "1900-01-01");
+    REQUIRE(result->getString("relevantPaymentEndDate") == "1900-01-01");
     REQUIRE(result->getString("paymentType") == "0");
     REQUIRE(result->getString("settlementSystem") == "0");
     REQUIRE(result->getString("documentNumber") == "123456");

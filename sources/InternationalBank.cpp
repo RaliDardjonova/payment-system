@@ -3,7 +3,7 @@
 
 InternationalBank::InternationalBank()
 {
-    bankSWIFT = "";
+    bankSWIFT = "00000000";
 }
 
 InternationalBank::InternationalBank(std::string newBankSWIFT)
@@ -11,7 +11,7 @@ InternationalBank::InternationalBank(std::string newBankSWIFT)
     setBankSWIFT(newBankSWIFT);
 }
 
-
+/* get bank name from the DB */
 std::string InternationalBank::getBankName() {
     sql::Statement *statement;
     sql::ResultSet *result;
@@ -31,7 +31,7 @@ std::string InternationalBank::getBankName() {
     return bankName;
 }
 
-
+/* get bank address from the DB */
 std::string InternationalBank::getBankAddress() {
     sql::Statement *statement;
     sql::ResultSet *result;
@@ -61,6 +61,7 @@ void InternationalBank::setBankSWIFT(std::string newBankSWIFT){
     }
 }
 
+/* save data of bank to the DB */
 void InternationalBank::save(){
     std::string values = "'" + getBankSWIFT() +
                         "', '" + getBankName() +

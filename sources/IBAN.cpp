@@ -1,7 +1,7 @@
 #include "../headers/IBAN.h"
 
 IBAN::IBAN(){
-    iban = "";
+    iban = "0000000000000000000000";
 }
 
 IBAN::IBAN(std::string newIBAN){
@@ -18,6 +18,7 @@ std::string IBAN::getIBAN() const {
     return iban;
 }
 
+/* get BIC code of the bank from the DB */
 std::string IBAN::getBIC() const {
 
     std::string shortName = getIBAN().substr(4, 4);
@@ -38,7 +39,7 @@ std::string IBAN::getBIC() const {
     return "";
 }
 
-
+/* Get bank name from the BD */
 std::string IBAN::getBankName() const {
     std::string shortName = getIBAN().substr(4, 4);
     sql::Statement *statement;
@@ -64,6 +65,7 @@ void IBAN::setIBAN(std::string newIBAN){
     }
 }
 
+/* check correctness of IBAN in Bulgaria */
 bool IBAN::isCorrect(std::string candidateIBAN) {
     if(candidateIBAN.size() != 22){
         return false;
@@ -85,6 +87,8 @@ int IBAN::getCorrespondingDigit(char letter){
     return -1;
 }
 
+/* Convert the letters in string with theirs
+corresponding numbers */
 std::string IBAN::convertToDigits(std::string letters){
     std::string digits;
     int lettersLength = letters.size();
@@ -100,6 +104,7 @@ std::string IBAN::convertToDigits(std::string letters){
     return digits;
 }
 
+/* convert string into 128bit integer */
 boost::multiprecision::int128_t IBAN::atoint128_t(std::string str)
 {
     boost::multiprecision::int128_t result = 0;
@@ -110,6 +115,5 @@ boost::multiprecision::int128_t IBAN::atoint128_t(std::string str)
         result *= 10;
         result += c - '0';
     }
-
     return result;
 }

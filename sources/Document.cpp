@@ -14,6 +14,8 @@ Document::Document(const Document& other){
     debitedParty = other.getDebitedParty();
 }
 
+/* Constructs an istance of Document from documentNumber
+if a document with this number exists in the DB */
 Document::Document(std::string newNumber){
     sql::Statement *statement;
     sql::ResultSet *result;
@@ -73,6 +75,7 @@ void Document::setDebitedParty(std::string newDebitedParty){
     debitedParty = newDebitedParty;
 }
 
+/* Save a document in the DB */
 int Document::save(){
     sql::Statement *statement;
     sql::ResultSet *checkResult;

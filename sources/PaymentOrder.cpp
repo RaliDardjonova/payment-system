@@ -80,6 +80,7 @@ double PaymentOrder::getAmount() const {
     return amount;
 }
 
+/* delete order from the database */
 void PaymentOrder::deleteFromDB(std::string orderID){
     std::string condition = "order_id = '" + orderID + "'";
     deleteFromTable(condition, "PaymentOrder");

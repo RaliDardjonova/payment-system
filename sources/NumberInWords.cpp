@@ -22,7 +22,12 @@ NumberInWords::NumberInWords(long long newWholePart, int newDecimalPart){
 NumberInWords::~NumberInWords(){}
 
 void NumberInWords::setWholePart(long long newWholePart){
-    wholePart = newWholePart;
+    if(newWholePart < 0 ){
+        wholePart = 0;
+    }
+    else {
+        wholePart = newWholePart;
+    }
 }
 
 void NumberInWords::setDecimalPart(int newDecimalPart){
@@ -53,6 +58,7 @@ std::string NumberInWords::getDecimalPartInWords(){
     return nameForNumber(decimalPart);
 }
 
+/* get name for number in english */
 std::string NumberInWords::nameForNumber (long long number) {
     if (number < 10) {
         return ones[number];

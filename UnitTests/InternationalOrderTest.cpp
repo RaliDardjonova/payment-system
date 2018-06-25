@@ -33,7 +33,7 @@ TEST_CASE ("Create Template International", "[create template]"){
     REQUIRE(result->getString("senderCharges") == "0");
     REQUIRE(result->getString("receiverCharges") == "0");
     REQUIRE(result->getString("receiverBankSWIFT") == "12345678");
-    REQUIRE(result->getString("intermediaryBankSWIFT") == "");
+    REQUIRE(result->getString("intermediaryBankSWIFT") == "00000000");
 
     InternationalOrder::deleteFromDB(lastID);
  }

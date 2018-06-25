@@ -21,7 +21,7 @@ TEST_CASE("Save transaction", "[save transaction]"){
         sql::ResultSet *result = statement->executeQuery(query);
 
         REQUIRE(result->next());
-        REQUIRE(result->getString("signDate") == "1900-01-00");
+        REQUIRE(result->getString("signDate") == "1900-01-01");
         REQUIRE(result->getString("status") == "0");
         REQUIRE(result->getString("type") == "C");
         REQUIRE(result->getString("isTemplate") == "0");
@@ -53,7 +53,7 @@ TEST_CASE("Save transaction", "[save transaction]"){
         sql::ResultSet *result = statement->executeQuery(query);
 
         REQUIRE(result->next());
-        REQUIRE(result->getString("signDate") == "1900-01-00");
+        REQUIRE(result->getString("signDate") == "1900-01-01");
         REQUIRE(result->getString("status") == "0");
         REQUIRE(result->getString("type") == "B");
         REQUIRE(result->getString("isTemplate") == "0");
@@ -63,8 +63,8 @@ TEST_CASE("Save transaction", "[save transaction]"){
         REQUIRE(result->getString("receiverName") == "");
         REQUIRE(result->getString("amount") == "0");
         REQUIRE(result->getString("description") == "");
-        REQUIRE(result->getString("relevantPaymentStartDate") == "1900-01-00");
-        REQUIRE(result->getString("relevantPaymentEndDate") == "1900-01-00");
+        REQUIRE(result->getString("relevantPaymentStartDate") == "1900-01-01");
+        REQUIRE(result->getString("relevantPaymentEndDate") == "1900-01-01");
         REQUIRE(result->getString("paymentType") == "0");
         REQUIRE(result->getString("settlementSystem") == "0");
         REQUIRE(result->getString("documentNumber") == "123456");
@@ -73,4 +73,31 @@ TEST_CASE("Save transaction", "[save transaction]"){
     }
 }
 
+TEST_CASE("Get order ID from DB", "[get order_id]"){
+    createConnection();
+    Transaction transaction = Transaction((new OrdinaryOrder())->clone());
+    transaction.save();
+    std::string transactionLastID = getLastInsertedID();
+    std::string query = "select order_id from Transaction where trans_id = '" + transactionLastID + "';";
+    sql::Statement *statement = connection->createStatement();
+    sql::ResultSet *result = statement->executeQuery(query);
 
+    REQUIRE(result->next());
+    REQUIRE(result->getString("order_id") == Transaction::getOrderID(transactionLastID));
+
+    Transaction::deleteFromDB(transactionLastID);
+}
+
+TEST_CASE("Delete transaction from DB", "[delete from DB]"){
+    createConnection();
+    Transaction transaction = Transaction((new OrdinaryOrder())->clone());
+    transaction.save();
+    std::string transactionLastID = getLastInsertedID();
+    std::string query = "select order_id from Transaction where trans_id = '" + transactionLastID + "';";
+
+    Transaction::deleteFromDB(transactionLastID);
+    sql::Statement *statement = connection->createStatement();
+    sql::ResultSet *result = statement->executeQuery(query);
+
+    REQUIRE(result->next() == false);
+}

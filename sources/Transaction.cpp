@@ -45,6 +45,8 @@ void Transaction::save(){
     saveToTable(values, "Transaction");
 }
 
+/* retreive the order id corresponding to
+transaction id from the DB */
 std::string Transaction::getOrderID(std::string transactionID){
     sql::Statement *statement;
     sql::ResultSet *result;
@@ -65,6 +67,8 @@ std::string Transaction::getOrderID(std::string transactionID){
     return "";
 }
 
+/* delete transaction from the DB
+and its corresponding order */
 void Transaction::deleteFromDB(std::string transactionID){
     PaymentOrder::deleteFromDB(getOrderID(transactionID));
 }

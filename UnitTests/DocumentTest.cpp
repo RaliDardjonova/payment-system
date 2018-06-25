@@ -18,7 +18,7 @@ TEST_CASE ("Construct document from number and database", "[document from name]"
 
         REQUIRE(d.getNumber() == "");
         REQUIRE(d.getType() == 0 );
-        REQUIRE(d.getDate().toString() == "1900-01-00");
+        REQUIRE(d.getDate().toString() == "1900-01-01");
         REQUIRE(d.getDebitedParty() == "");
     }
 }

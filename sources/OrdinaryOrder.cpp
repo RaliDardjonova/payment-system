@@ -18,6 +18,8 @@ std::string OrdinaryOrder::getCurrency() const {
     return currency;
 }
 
+/* save ordinary order to DB with
+the possibility of being template */
 void OrdinaryOrder::save(bool isTemplate){
     std::string paymentOrderValues = "NULL, 'C', '" + std::to_string(isTemplate) +
                                     "', '" + getSenderIBAN().getIBAN() +

@@ -13,14 +13,12 @@ public:
     int getDay() const;
     int getMonth() const;
     int getYear() const;
-    void setDay(unsigned int newDay);
-    void setMonth(unsigned int newMonth);
-    void setYear(unsigned int newDay);
+    void setDay(int newDay);
+    void setMonth(int newMonth);
+    void setYear(int newDay);
     static Date getCurrentDate();
 private:
     tm dateTime;
 };
 
 #endif
-
-

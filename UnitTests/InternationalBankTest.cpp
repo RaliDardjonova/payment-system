@@ -36,12 +36,12 @@ TEST_CASE("Set SWIFT", "[set SWIFT]")
 
     SECTION("set shorter SWIFT"){
         b.setBankSWIFT("1234567");
-        REQUIRE(b.getBankSWIFT() == "");
+        REQUIRE(b.getBankSWIFT() == "00000000");
     }
 
     SECTION("set longer SWIFT"){
         b.setBankSWIFT("123456789");
-        REQUIRE(b.getBankSWIFT() == "");
+        REQUIRE(b.getBankSWIFT() == "00000000");
     }
 }
 
@@ -53,5 +53,5 @@ TEST_CASE("Get SWIFT", "[get SWIFT]"){
 
     REQUIRE(b1.getBankSWIFT() == "12345678");
     REQUIRE(b2.getBankSWIFT() == "22222222");
-    REQUIRE(b3.getBankSWIFT() == "");
+    REQUIRE(b3.getBankSWIFT() == "00000000");
 }

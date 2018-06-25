@@ -98,6 +98,6 @@ CREATE TABLE Bank
 
 insert into Bank values ('RZBBBGSF', 'raifai', 'RZBB');
 insert into InternationalBank values ( '12345678', 'nqkwa banka1', 'sofiq, adresa na nqkwata banka');
-insert into InternationalBank values ('', '', '');
+insert into InternationalBank values ('00000000', '', '');
 insert into Document values ('123456', '9', '2012-12-23', 'Ivan Ivanov');
 insert into Document values ('asd123', '1', '2018-12-31', 'Pesho Peshov');
