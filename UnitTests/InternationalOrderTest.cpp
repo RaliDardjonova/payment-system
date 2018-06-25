@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../InternationalPaymentOrder.h"
+#include "../headers/InternationalPaymentOrder.h"
 
 TEST_CASE ("Create Template International", "[create template]"){
 

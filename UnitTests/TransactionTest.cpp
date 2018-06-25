@@ -1,7 +1,7 @@
 #include "catch.hpp"
-#include "../Transaction.h"
-#include "../OrdinaryOrder.h"
-#include "../FromToBudgetOrder.h"
+#include "../headers/Transaction.h"
+#include "../headers/OrdinaryOrder.h"
+#include "../headers/FromToBudgetOrder.h"
 
 TEST_CASE("Save transaction", "[save transaction]"){
     createConnection();

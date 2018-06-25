@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../NumberInWords.h"
+#include "../headers/NumberInWords.h"
 
 TEST_CASE ("number in words", "[number in words]"){
     NumberInWords number = NumberInWords(12, 12);

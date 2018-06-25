@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../OrdinaryOrder.h"
+#include "../headers/OrdinaryOrder.h"
 
  TEST_CASE ("Create Template ordinary", "[create template]"){
 

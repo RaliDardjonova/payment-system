@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../Document.h"
+#include "../headers/Document.h"
 
 TEST_CASE ("Construct document from number and database", "[document from name]"){
     createConnection();

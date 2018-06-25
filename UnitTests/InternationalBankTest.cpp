@@ -1,6 +1,6 @@
 
 #include "catch.hpp"
-#include "../InternationalBank.h"
+#include "../headers/InternationalBank.h"
 
 
 TEST_CASE("Fetch bank name from database", "[fetch name]"){

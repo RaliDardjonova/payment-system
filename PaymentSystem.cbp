@@ -58,7 +58,10 @@
 		<Unit filename="UnitTests/FromToBudgetOrderTest.cpp" />
 		<Unit filename="UnitTests/IBANTest.cpp" />
 		<Unit filename="UnitTests/InternationalBankTest.cpp" />
+		<Unit filename="UnitTests/InternationalOrderTest.cpp" />
+		<Unit filename="UnitTests/NumberInWordsTest.cpp" />
 		<Unit filename="UnitTests/OrdinaryOrderTest.cpp" />
+		<Unit filename="UnitTests/TransactionTest.cpp" />
 		<Unit filename="UnitTests/catch.hpp" />
 		<Unit filename="UnitTests/maintest.cpp" />
 		<Unit filename="ValueDate.h" />

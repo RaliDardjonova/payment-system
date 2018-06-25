@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../IBAN.h"
+#include "../headers/IBAN.h"
 
 TEST_CASE ("Get bank BIC", "[get BIC]"){
     createConnection();

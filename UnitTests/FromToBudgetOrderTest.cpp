@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "../FromToBudgetOrder.h"
+#include "../headers/FromToBudgetOrder.h"
 
 TEST_CASE ("Get ammount in words", "[ammount in words]"){
     FromToBudgetOrder order = FromToBudgetOrder();
